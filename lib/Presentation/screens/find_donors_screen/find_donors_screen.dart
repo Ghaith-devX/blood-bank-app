@@ -35,14 +35,21 @@ class FindDonorsScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10))))),
                 SizedBox(width: GSizes.spaceBetweenItems),
                 Container(
-                  decoration: BoxDecoration(
-                      color: GColors.primaryColor,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.filter, color: GColors.white)),
-                ),
+                    decoration: BoxDecoration(
+                        color: GColors.primaryColor,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.filter, color: GColors.white))),
               ],
+            ),
+            SizedBox(width: GSizes.spaceBetweenSections * 2),
+            Container(
+              height: 80,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: GColors.warmWhite,
+                  borderRadius: BorderRadius.circular(10)),
             ),
           ])),
     );
