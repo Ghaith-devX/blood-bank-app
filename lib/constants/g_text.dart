@@ -47,6 +47,11 @@ class GText {
   static const String verifiedUrlImage = "assets/images/verify_image.png";
   static const String btnEnd = "الانتهاء";
 
+  // Home Screen
+  static const String personImage1 = "assets/images/persons/person1.png";
+  static const String personImage2 = "assets/images/persons/person2.png";
+  static const String personImage3 = "assets/images/persons/person3.png";
+
 // app details
   static const String appLogo =
       "assets/images/logo_app/logo_blood_bank_app.png";
