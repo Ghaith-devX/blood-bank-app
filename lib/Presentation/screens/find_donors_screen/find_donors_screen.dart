@@ -49,7 +49,7 @@ class FindDonorsScreen extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                   color: GColors.warmWhite,
-                  borderRadius: BorderRadius.circular(9)),
+                  borderRadius: BorderRadius.circular(10)),
             ),
           ])),
     );
