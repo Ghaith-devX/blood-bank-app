@@ -3,13 +3,11 @@ import 'package:blood_bank/constants/g_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    super.key,
-    required this.text,
-    required this.icon,
-  });
+  const CustomTextFormField(
+      {super.key, required this.text, required this.icon, this.controller});
   final String text;
   final IconData icon;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
         child: Row(children: [
           Expanded(
               child: TextFormField(
+            controller: controller,
             autofocus: false,
             decoration: InputDecoration(
                 hintText: text,

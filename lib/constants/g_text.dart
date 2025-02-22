@@ -47,10 +47,11 @@ class GText {
   static const String verifiedUrlImage = "assets/images/verify_image.png";
   static const String btnEnd = "الانتهاء";
 
-  // Home Screen
+  // Find Donors Screen
   static const String personImage1 = "assets/images/persons/person1.png";
   static const String personImage2 = "assets/images/persons/person2.png";
   static const String personImage3 = "assets/images/persons/person3.png";
+  static const String titleFindDonorsScreen = "البحث عن متبرعين";
 
 // app details
   static const String appLogo =
