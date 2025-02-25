@@ -1,6 +1,9 @@
 class GText {
   static const String myFont = "Tajawal";
 
+  static const String emailValidity =
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+
   static const String onBoardingImage1 = "assets/images/Doctors.png";
   static const String onBoardingImage2 = "assets/images/Medicine.png";
   static const String onBoardingTitle1 = "ابحث عن متبرعي الدم";

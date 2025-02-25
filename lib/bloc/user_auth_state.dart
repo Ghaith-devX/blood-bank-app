@@ -18,3 +18,11 @@ class UserAuthErrorState extends UserAuthState {
 
   UserAuthErrorState({required this.error});
 }
+
+class UserAuthSignOutSuccessState extends UserAuthState {}
+
+class UserAuthLoginSuccessState extends UserAuthState {
+  final User? user;
+
+  UserAuthLoginSuccessState({required this.user});
+}

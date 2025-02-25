@@ -16,3 +16,12 @@ class UserAuthSignUpEvent extends UserAuthEvent {
       required this.bloodType,
       required this.location});
 }
+
+class UserAuthLoginEvent extends UserAuthEvent {
+  final String email;
+  final String password;
+
+  UserAuthLoginEvent({required this.email, required this.password});
+}
+
+class UserAuthSignOutEvent extends UserAuthEvent {}

@@ -1,3 +1,4 @@
+import 'package:blood_bank/Presentation/screens/find_donors_screen/find_donors_screen.dart';
 import 'package:blood_bank/bloc/user_auth_bloc.dart';
 import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/data/repositories/user_repository.dart';
@@ -13,13 +14,13 @@ import 'Presentation/screens/on_boarding_screen/on_boarding_screen_one.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  final _firebaseService = FirebaseService();
-  final _firebaseRepostitory = FirebaseRepository(_firebaseService);
+
   runApp(
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => UserAuthBloc(_firebaseRepostitory),
+          create: (context) =>
+              UserAuthBloc(FirebaseRepository(FirebaseService())),
         ),
       ],
       child: YemenBloodBankApp(),
@@ -32,6 +33,7 @@ class YemenBloodBankApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userState = FirebaseService().currentUser;
     Future.delayed(Duration.zero, () {
       SystemChannels.textInput.invokeMethod('TextInput.hide');
     });
@@ -48,7 +50,7 @@ class YemenBloodBankApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: OnBoardingScreenOne(),
+      home: userState == null ? OnBoardingScreenOne() : FindDonorsScreen(),
     );
   }
 }

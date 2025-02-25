@@ -4,41 +4,35 @@ import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField(
-      {super.key, required this.text, required this.icon, this.controller});
+      {super.key,
+      required this.text,
+      required this.icon,
+      this.controller,
+      this.validator});
   final String text;
   final IconData icon;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          color: GColors.warmWhite, borderRadius: BorderRadius.circular(15)),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Row(children: [
-          Expanded(
-              child: TextFormField(
-            controller: controller,
-            autofocus: false,
-            decoration: InputDecoration(
-                hintText: text,
-                hintStyle: GStyle.subTitleStyle,
-                border: OutlineInputBorder(borderSide: BorderSide.none)),
-          )),
-          Text(
-            "|",
-            style: TextStyle(fontSize: 20, color: GColors.grey),
-          ),
-          SizedBox(width: 5),
-          Icon(
-            icon,
-            color: GColors.primaryColor,
-            size: 28,
-          ),
-        ]),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(),
+      child: Row(children: [
+        Expanded(
+            child: TextFormField(
+          validator: validator,
+          controller: controller,
+          autofocus: false,
+          decoration: InputDecoration(
+              fillColor: GColors.warmWhite,
+              filled: true,
+              hintText: text,
+              hintStyle: GStyle.subTitleStyle,
+              border: OutlineInputBorder(borderSide: BorderSide.none)),
+        )),
+        SizedBox(width: 10),
+        Icon(icon, color: GColors.primaryColor, size: 28),
+      ]),
     );
   }
 }
