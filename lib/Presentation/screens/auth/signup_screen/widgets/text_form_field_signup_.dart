@@ -1,13 +1,13 @@
 import 'package:blood_bank/Presentation/screens/auth/login_screen/widgets/custom_text_form_field.dart';
-import 'package:blood_bank/Presentation/screens/find_donors_screen/find_donors_screen.dart';
+import 'package:blood_bank/Presentation/screens/auth/verify_email/verify_email.dart';
 import 'package:blood_bank/Presentation/widgets/custom_button.dart';
+import 'package:blood_bank/Presentation/widgets/custom_circular_progress_indicator.dart';
 import 'package:blood_bank/Presentation/widgets/show_custom_snackbar.dart';
-import 'package:blood_bank/bloc/user_auth_bloc.dart';
+import 'package:blood_bank/bisnesse_logic/bloc_auth/user_auth_bloc.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/constants/g_text.dart';
 import 'package:blood_bank/utils/validators.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TextFormFieldSignupScreen extends StatelessWidget {
@@ -61,7 +61,7 @@ class TextFormFieldSignupScreen extends StatelessWidget {
             text: GText.btnCreateAccount,
             onPressed: () {
               if (formState.currentState!.validate()) {
-                BlocProvider.of<UserAuthBloc>(context).add(UserAuthSignUpEvent(
+                context.read<UserAuthBloc>().add(UserAuthSignUpEvent(
                     email: emailController.text.trim(),
                     password: passwordController.text.trim(),
                     username: usernameController.text.trim(),
@@ -70,26 +70,26 @@ class TextFormFieldSignupScreen extends StatelessWidget {
               }
             }),
         SizedBox(height: GSizes.spaceBetweenSections * 2),
-        BlocBuilder<UserAuthBloc, UserAuthState>(
-          builder: (context, state) {
-            if (state is UserAuthLoadingState) {
-              return Center(child: CircularProgressIndicator());
-            } else if (state is UserAuthErrorState) {
-              SchedulerBinding.instance.addPostFrameCallback((_) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(state.error)),
-                );
-              });
-            } else if (state is UserAuthSuccessState) {
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                showCustomSnackBar(context, "تم تسجيل الدخول بنجاح!");
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => FindDonorsScreen()),
-                    (route) => false);
-              });
+        BlocListener<UserAuthBloc, UserAuthState>(
+          listener: (context, state) {
+            if (state is UserAuthErrorState) {
+              showCustomSnackBar(context, state.error);
+            } else if (state is UserAuthSignUpSuccessState) {
+              showCustomSnackBar(context, "يجب التحقق من بريدك الالكتروني");
+
+              context.read<UserAuthBloc>().add(UserAuthVerifyEmailEvent());
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => VerifyEmail()));
             }
-            return Container();
           },
+          child: BlocBuilder<UserAuthBloc, UserAuthState>(
+            builder: (context, state) {
+              if (state is UserAuthLoadingState) {
+                return Center(child: customCircularProgressIndicator());
+              }
+              return Container();
+            },
+          ),
         ),
       ]),
     );

@@ -1,14 +1,12 @@
+import 'package:blood_bank/bisnesse_logic/bloc_auth/user_auth_bloc.dart';
 import 'package:blood_bank/data/repositories/user_repository.dart';
 import 'package:blood_bank/utils/validators_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-part 'user_auth_event.dart';
-part 'user_auth_state.dart';
 
 class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
   final FirebaseRepository _firebaseRepository;
+
   UserAuthBloc(this._firebaseRepository) : super(UserAuthInitial()) {
     on<UserAuthSignUpEvent>((event, emit) async {
       emit(UserAuthLoadingState());
@@ -22,16 +20,9 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
           event.location,
         );
 
-        if (user != null) {
-          emit(UserAuthSuccessState(user: user));
-        } else {
-          emit(UserAuthErrorState(
-              error: "فشل تسجيل الحساب. يرجى المحاولة لاحقًا."));
-        }
+        emit(UserAuthSignUpSuccessState(user: user));
       } on FirebaseAuthException catch (e) {
         emit(UserAuthErrorState(error: getFirebaseAuthErrorMessage(e)));
-        print("كود الخطأ: ${e.code}");
-        print("كود الخطأ: ${e.message}");
       } catch (e) {
         emit(UserAuthErrorState(error: "حدث خطأ غير متوقع: ${e.toString()}"));
       }
@@ -43,16 +34,12 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
       try {
         var user =
             await _firebaseRepository.signIn(event.email, event.password);
-        if (user != null) {
-          emit(UserAuthLoginSuccessState(user: user));
-        } else {
-          emit(UserAuthErrorState(
-              error: "فشل تسجيل الحساب. يرجى المحاولة لاحقًا."));
-        }
+
+        emit(UserAuthSignInSuccessState(user: user));
       } on FirebaseAuthException catch (e) {
         emit(UserAuthErrorState(error: getFirebaseAuthErrorMessage(e)));
-        print("كود الخطأ: ${e.code}");
-        print("كود الخطأ: ${e.message}");
+      } catch (e) {
+        emit(UserAuthErrorState(error: "حدث خطأ غير متوقع: ${e.toString()}"));
       }
     });
 
@@ -63,8 +50,29 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
       try {
         await _firebaseRepository.signOut();
         emit(UserAuthSignOutSuccessState());
+      } on FirebaseAuthException catch (e) {
+        emit(UserAuthErrorState(error: e.toString()));
       } catch (e) {
         emit(UserAuthErrorState(error: e.toString()));
+      }
+    });
+
+    on<UserAuthVerifyEmailEvent>((event, emit) async {
+      emit(UserAuthLoadingVerifyEmail());
+      try {
+        await _firebaseRepository.verifyEmail();
+        emit(UserAuthVerifyEmailState(email: _firebaseRepository.userEmail()));
+
+        if (FirebaseAuth.instance.currentUser != null &&
+            FirebaseAuth.instance.currentUser!.emailVerified) {
+          emit(UserAuthIsVerifedState(isVerifed: true));
+        } else {
+          emit(UserAuthIsVerifedState(isVerifed: false));
+        }
+      } on FirebaseAuthException catch (e) {
+        emit(UserAuthErrorState(error: getFirebaseAuthErrorMessage(e)));
+      } catch (e) {
+        emit(UserAuthErrorState(error: "حدث خطأ غير متوقع: ${e.toString()}"));
       }
     });
   }

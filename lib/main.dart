@@ -1,5 +1,6 @@
 import 'package:blood_bank/Presentation/screens/find_donors_screen/find_donors_screen.dart';
-import 'package:blood_bank/bloc/user_auth_bloc.dart';
+import 'package:blood_bank/bisnesse_logic/bloc_auth/user_auth_bloc.dart';
+import 'package:blood_bank/bisnesse_logic/bloc_auth/verify_email/verify_email_cubit.dart';
 import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/data/repositories/user_repository.dart';
 import 'package:blood_bank/data/services/firebase_service.dart';
@@ -19,9 +20,9 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-              UserAuthBloc(FirebaseRepository(FirebaseService())),
-        ),
+            create: (context) =>
+                UserAuthBloc(FirebaseRepository(FirebaseService()))),
+        BlocProvider(create: (context) => VerifyEmailCubit())
       ],
       child: YemenBloodBankApp(),
     ),

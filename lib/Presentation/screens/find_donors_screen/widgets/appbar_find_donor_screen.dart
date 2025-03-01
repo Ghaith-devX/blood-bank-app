@@ -1,5 +1,5 @@
 import 'package:blood_bank/Presentation/screens/auth/login_screen/login_screen.dart';
-import 'package:blood_bank/bloc/user_auth_bloc.dart';
+import 'package:blood_bank/bisnesse_logic/bloc_auth/user_auth_bloc.dart';
 import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/constants/g_style.dart';
 import 'package:blood_bank/constants/g_text.dart';

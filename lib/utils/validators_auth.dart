@@ -15,10 +15,14 @@ String getFirebaseAuthErrorMessage(FirebaseAuthException e) {
     case 'wrong-password':
       return "كلمة المرور غير صحيحة. يرجى المحاولة مجددًا.";
     case 'too-many-requests':
-      return "تم حظر المحاولات لفترة وجيزة. يرجى المحاولة لاحقًا.";
+      return "تم حظر المحاولات لفترة وجيزة بسبب محاولات كثيرة. يرجى المحاولة لاحقًا.";
     case 'operation-not-allowed':
       return "عملية تسجيل الدخول غير مفعلة لهذا البريد.";
+    case 'network-request-failed':
+      return "فشل الاتصال بالشبكة. يرجى التحقق من الإنترنت والمحاولة مجددًا.";
+    case 'invalid-credential':
+      return "بيانات الاعتماد غير صحيحة أو منتهية الصلاحية.";
     default:
-      return "حدث خطأ غير معروف. يرجى المحاولة لاحقًا.";
+      return "حدث خطأ غير معروف. كود الخطأ: ${e.code}";
   }
 }

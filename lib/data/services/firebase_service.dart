@@ -26,8 +26,10 @@ class FirebaseService {
       }
 
       return userCredential.user;
+    } on FirebaseAuthException {
+      rethrow;
     } catch (e) {
-      throw Exception('Failed to sign up: $e');
+      throw Exception("حدث خطأ أثناء إنشاء الحساب: ${e.toString()}");
     }
   }
 
@@ -38,12 +40,37 @@ class FirebaseService {
         password: password,
       );
       return userCredential.user;
+    } on FirebaseAuthException {
+      rethrow;
     } catch (e) {
-      throw Exception('Failed to sign in: $e');
+      throw Exception("حدث خطأ أثناء تسجيل الدخول: ${e.toString()}");
     }
   }
 
   Future<void> signOut() async {
-    await _auth.signOut();
+    try {
+      await _auth.signOut();
+    } on FirebaseAuthException {
+      rethrow;
+    } catch (e) {
+      throw Exception("حدث خطأ أثناء تسجيل الخروج. $e");
+    }
+  }
+
+  Future<void> verifyEmail() async {
+    try {
+      await _auth.currentUser!.sendEmailVerification();
+    } on FirebaseAuthException {
+      rethrow;
+    } catch (e) {
+      throw Exception("حدث خطأ أثناء تسجيل الخروج.");
+    }
+  }
+
+  String get userEmail {
+    if (_auth.currentUser != null) {
+      return _auth.currentUser!.email ?? "لا يوجد بريد إلكتروني";
+    }
+    return "لا يوجد مستخدم";
   }
 }
