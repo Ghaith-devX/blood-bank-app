@@ -43,7 +43,7 @@ class GText {
 
   // verify screen
   static const String textVerify =
-      "تم إرسال رسالة تحقق إلى بريدك. يرجى التحقق منها أو إعادة الإرسال أدناه.";
+      "بالنقر على هذا الزر، سيتم إرسال رسالة تحقق إلى بريدك الإلكتروني. يرجى فتح بريدك والضغط على رابط التحقق لإكمال عملية تأكيد حسابك.";
   static const String send = "إرسال";
 
   // Verification Success Page

@@ -21,7 +21,7 @@ class VerifyEmail extends StatelessWidget {
       body: Padding(
           padding: GSizes.screenPadding,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(FirebaseRepository(FirebaseService()).userEmail(),
+            Text(FirebaseRepository(FirebaseService()).userEmail,
                 style: GStyle.titleStyle),
             SizedBox(height: GSizes.spaceBetweenItems),
             Text(GText.textVerify,
@@ -32,19 +32,54 @@ class VerifyEmail extends StatelessWidget {
                 onPressed: () {
                   context.read<UserAuthBloc>().add(UserAuthVerifyEmailEvent());
                 }),
+            SizedBox(height: GSizes.spaceBetweenSections),
+            BlocListener<UserAuthBloc, UserAuthState>(
+              listener: (context, state) {
+                if (state is UserAuthVerifyEmailSuccessState) {
+                  showCustomSnackBar(context,
+                      "تم إرسال رسالة التحقق إلى بريدك الإلكتروني. يرجى التحقق من بريدك واتباع التعليمات لتأكيد حسابك.");
+                } else if (state is UserAuthVerifyEmailErrorState) {
+                  showCustomSnackBar(context, state.error);
+                }
+              },
+              child: BlocBuilder<UserAuthBloc, UserAuthState>(
+                builder: (context, state) {
+                  if (state is UserAuthVerifyEmailLoadingState) {
+                    return Center(child: customCircularProgressIndicator());
+                  }
+                  return SizedBox();
+                },
+              ),
+            ),
+            SizedBox(height: GSizes.spaceBetweenSections),
+            CustomButton(
+                text: "تحقق",
+                onPressed: () {
+                  context.read<VerifyEmailCubit>().checkEmailVerification();
+                }),
+            SizedBox(height: GSizes.spaceBetweenSections),
             BlocListener<VerifyEmailCubit, VerifyEmailState>(
               listener: (context, state) {
                 if (state is UserEmailVerified) {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => VerificationSuccessPage()));
-                } else if (state is UserEmailVerificationFailed) {
-                  showCustomSnackBar(context, state.error);
                 }
               },
               child: BlocBuilder<VerifyEmailCubit, VerifyEmailState>(
                 builder: (context, state) {
                   if (state is UserEmailLoading) {
                     return Center(child: customCircularProgressIndicator());
+                  } else if (state is UserEmailVerified) {
+                    return Center(
+                        child: Text("تم التحقق من بريدك الإلكتروني بنجاح",
+                            style: GStyle.subTitleStyle));
+                  } else if (state is UserEmailNotVerified) {
+                    return Center(
+                        child: Text("لم يتم التحقق من البريد الإلكتروني",
+                            style: GStyle.subTitleStyle));
+                  } else if (state is UserEmailVerificationFailed) {
+                    return Center(
+                        child: Text(state.error, style: GStyle.subTitleStyle));
                   }
                   return SizedBox();
                 },

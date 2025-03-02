@@ -24,5 +24,9 @@ class FirebaseRepository {
     await _firebaseService.verifyEmail();
   }
 
-  String userEmail() => _firebaseService.userEmail;
+  Future<void> resetPassword(String email) async {
+    await _firebaseService.resetPassword(email);
+  }
+
+  String get userEmail => _firebaseService.userEmail;
 }

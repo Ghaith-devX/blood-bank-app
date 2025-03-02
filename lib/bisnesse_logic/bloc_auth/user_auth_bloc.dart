@@ -9,6 +9,7 @@ part 'user_auth_state.dart';
 
 class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
   final FirebaseRepository _firebaseRepository;
+  final User? user = FirebaseAuth.instance.currentUser;
 
   UserAuthBloc(this._firebaseRepository) : super(UserAuthInitial()) {
     on<UserAuthSignUpEvent>((event, emit) async {
@@ -61,21 +62,29 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
     });
 
     on<UserAuthVerifyEmailEvent>((event, emit) async {
-      emit(UserAuthLoadingVerifyEmail());
+      emit(UserAuthVerifyEmailLoadingState());
       try {
-        await _firebaseRepository.verifyEmail();
-        emit(UserAuthVerifyEmailState(email: _firebaseRepository.userEmail()));
-
-        if (FirebaseAuth.instance.currentUser != null &&
-            FirebaseAuth.instance.currentUser!.emailVerified) {
-          emit(UserAuthIsVerifedState(isVerifed: true));
-        } else {
-          emit(UserAuthIsVerifedState(isVerifed: false));
+        if (user != null) {
+          await _firebaseRepository.verifyEmail();
+          emit(UserAuthVerifyEmailSuccessState());
         }
       } on FirebaseAuthException catch (e) {
-        emit(UserAuthErrorState(error: getFirebaseAuthErrorMessage(e)));
+        emit(UserAuthVerifyEmailErrorState(error: e.code));
       } catch (e) {
-        emit(UserAuthErrorState(error: "حدث خطأ غير متوقع: ${e.toString()}"));
+        emit(UserAuthVerifyEmailErrorState(error: e.toString()));
+      }
+    });
+
+    on<UserAuthResetPasswordSuccessEvent>((event, emit) {
+      emit(UserAuthResetPasswordLoadingState());
+
+      try {
+        _firebaseRepository.resetPassword(event.email);
+        emit(UserAuthResetPasswordSuccessState());
+      } on FirebaseAuthException catch (e) {
+        emit(UserAuthResetPasswordErrorState(error: e.code));
+      } catch (e) {
+        emit(UserAuthResetPasswordErrorState(error: "خطأ غير معروف : $e"));
       }
     });
   }

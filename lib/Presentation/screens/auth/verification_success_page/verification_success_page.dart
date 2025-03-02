@@ -1,3 +1,4 @@
+import 'package:blood_bank/Presentation/screens/find_donors_screen/find_donors_screen.dart';
 import 'package:blood_bank/Presentation/widgets/custom_button.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/constants/g_text.dart';
@@ -14,7 +15,13 @@ class VerificationSuccessPage extends StatelessWidget {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Image(image: AssetImage(GText.verifiedUrlImage)),
           SizedBox(height: GSizes.spaceBetweenSections * 2),
-          CustomButton(text: GText.btnEnd, onPressed: () {})
+          CustomButton(
+              text: GText.btnEnd,
+              onPressed: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => FindDonorsScreen()),
+                    (route) => false);
+              })
         ]),
       ),
     );

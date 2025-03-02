@@ -27,11 +27,6 @@ class UserAuthErrorState extends UserAuthState {
 
 class UserAuthSignOutSuccessState extends UserAuthState {}
 
-class UserAuthVerifyEmailState extends UserAuthState {
-  final String email;
-  UserAuthVerifyEmailState({required this.email});
-}
-
 class UserAuthIsVerifedState extends UserAuthState {
   final bool isVerifed;
 
@@ -39,3 +34,23 @@ class UserAuthIsVerifedState extends UserAuthState {
 }
 
 class UserAuthLoadingVerifyEmail extends UserAuthState {}
+
+class UserAuthVerifyEmailLoadingState extends UserAuthState {}
+
+class UserAuthVerifyEmailSuccessState extends UserAuthState {}
+
+class UserAuthVerifyEmailErrorState extends UserAuthState {
+  final String error;
+
+  UserAuthVerifyEmailErrorState({required this.error});
+}
+
+class UserAuthResetPasswordLoadingState extends UserAuthState {}
+
+class UserAuthResetPasswordSuccessState extends UserAuthState {}
+
+class UserAuthResetPasswordErrorState extends UserAuthState {
+  final String error;
+
+  UserAuthResetPasswordErrorState({required this.error});
+}

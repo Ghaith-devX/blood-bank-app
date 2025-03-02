@@ -59,11 +59,29 @@ class FirebaseService {
 
   Future<void> verifyEmail() async {
     try {
-      await _auth.currentUser!.sendEmailVerification();
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        await user.reload();
+        await user.sendEmailVerification();
+      } else {
+        throw FirebaseAuthException(
+            code: "user-not-found", message: "المستخدم غير موجود");
+      }
     } on FirebaseAuthException {
       rethrow;
     } catch (e) {
-      throw Exception("حدث خطأ أثناء تسجيل الخروج.");
+      throw Exception("حدث خطأ أثناء إرسال البريد الإلكتروني.");
+    }
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException {
+      rethrow;
+    } catch (e) {
+      throw Exception("حدث خطأ غير معروف");
     }
   }
 

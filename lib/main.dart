@@ -51,7 +51,9 @@ class YemenBloodBankApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: userState == null ? OnBoardingScreenOne() : FindDonorsScreen(),
+      home: userState != null && userState.emailVerified
+          ? FindDonorsScreen()
+          : OnBoardingScreenOne(),
     );
   }
 }

@@ -77,7 +77,6 @@ class TextFormFieldSignupScreen extends StatelessWidget {
             } else if (state is UserAuthSignUpSuccessState) {
               showCustomSnackBar(context, "يجب التحقق من بريدك الالكتروني");
 
-              context.read<UserAuthBloc>().add(UserAuthVerifyEmailEvent());
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => VerifyEmail()));
             }
