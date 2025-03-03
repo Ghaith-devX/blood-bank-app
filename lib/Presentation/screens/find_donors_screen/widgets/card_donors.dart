@@ -7,8 +7,13 @@ import 'package:flutter/material.dart';
 class CardDonors extends StatelessWidget {
   const CardDonors({
     super.key,
+    required this.donorName,
+    required this.donorLocation,
+    required this.donorBloodType,
   });
-
+  final String donorName;
+  final String donorLocation;
+  final String donorBloodType;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +31,7 @@ class CardDonors extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text("فاعل خير",
+                    Text(donorName,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
@@ -39,7 +44,7 @@ class CardDonors extends StatelessWidget {
                       children: [
                         Icon(Icons.location_on),
                         Flexible(
-                          child: Text("شبوة/ عتق/ حي الجوازات ",
+                          child: Text(donorLocation,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: TextStyle(
@@ -63,7 +68,7 @@ class CardDonors extends StatelessWidget {
                   Positioned(
                     right: 20,
                     top: 28,
-                    child: Text("AB+",
+                    child: Text(donorBloodType,
                         style: TextStyle(
                             color: GColors.white,
                             fontSize: 18,

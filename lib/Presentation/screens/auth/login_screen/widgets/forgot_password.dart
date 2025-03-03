@@ -1,4 +1,4 @@
-import 'package:blood_bank/Presentation/screens/auth/reset_password_screen.dart';
+import 'package:blood_bank/Presentation/screens/auth/reset_password/reset_password_screen.dart';
 import 'package:blood_bank/constants/g_style.dart';
 import 'package:blood_bank/constants/g_text.dart';
 import 'package:flutter/material.dart';

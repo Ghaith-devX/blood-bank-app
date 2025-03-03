@@ -1,6 +1,8 @@
 // lib/services/firebase_service.dart
+import 'package:blood_bank/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class FirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -90,5 +92,25 @@ class FirebaseService {
       return _auth.currentUser!.email ?? "لا يوجد بريد إلكتروني";
     }
     return "لا يوجد مستخدم";
+  }
+
+  Future<List<UserModel>> get() async {
+    List<UserModel> userList = [];
+
+    try {
+      final user = await FirebaseFirestore.instance.collection("users").get();
+
+      user.docs.forEach((element) {
+        return userList.add(UserModel.fromJson(element.data()));
+      });
+      return userList;
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print("خطأ ${e.code} : ${e.message}");
+      }
+      return userList;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
   }
 }
