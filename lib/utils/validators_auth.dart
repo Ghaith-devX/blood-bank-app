@@ -23,6 +23,6 @@ String getFirebaseAuthErrorMessage(FirebaseAuthException e) {
     case 'invalid-credential':
       return "بيانات الاعتماد غير صحيحة أو منتهية الصلاحية.";
     default:
-      return "حدث خطأ غير معروف. كود الخطأ: ${e.code}";
+      return "الرجاء إدخال بريد إلكتروني";
   }
 }

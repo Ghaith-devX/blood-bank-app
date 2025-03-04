@@ -64,27 +64,33 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
     on<UserAuthVerifyEmailEvent>((event, emit) async {
       emit(UserAuthVerifyEmailLoadingState());
       try {
-        if (user != null) {
+        if (FirebaseAuth.instance.currentUser != null) {
           await _firebaseRepository.verifyEmail();
           emit(UserAuthVerifyEmailSuccessState());
+        } else {
+          emit(UserAuthVerifyEmailErrorState(error: "المستخدم غير مسجل دخول"));
         }
       } on FirebaseAuthException catch (e) {
+        print("🔥 FirebaseAuthException: ${e.code} - ${e.message}");
         emit(UserAuthVerifyEmailErrorState(error: e.code));
       } catch (e) {
+        print("⚠️ Unexpected error: ${e.toString()}");
         emit(UserAuthVerifyEmailErrorState(error: e.toString()));
       }
     });
 
-    on<UserAuthResetPasswordSuccessEvent>((event, emit) {
+    on<UserAuthResetPasswordEvent>((event, emit) async {
       emit(UserAuthResetPasswordLoadingState());
 
       try {
-        _firebaseRepository.resetPassword(event.email);
+        await _firebaseRepository.resetPassword(event.email);
         emit(UserAuthResetPasswordSuccessState());
       } on FirebaseAuthException catch (e) {
-        emit(UserAuthResetPasswordErrorState(error: e.code));
+        emit(UserAuthResetPasswordErrorState(
+            error: getFirebaseAuthErrorMessage(e)));
       } catch (e) {
-        emit(UserAuthResetPasswordErrorState(error: "خطأ غير معروف : $e"));
+        emit(UserAuthResetPasswordErrorState(
+            error: 'الرجاء إدخال بريد إلكتروني'));
       }
     });
   }

@@ -63,7 +63,7 @@ class FirebaseService {
     try {
       User? user = FirebaseAuth.instance.currentUser;
 
-      if (user != null) {
+      if (user != null && user.emailVerified == false) {
         await user.reload();
         await user.sendEmailVerification();
       } else {
@@ -83,7 +83,7 @@ class FirebaseService {
     } on FirebaseAuthException {
       rethrow;
     } catch (e) {
-      throw Exception("حدث خطأ غير معروف");
+      throw Exception('الرجاء إدخال بريد إلكتروني');
     }
   }
 

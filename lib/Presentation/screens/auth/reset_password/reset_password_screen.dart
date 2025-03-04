@@ -1,10 +1,13 @@
 import 'package:blood_bank/Presentation/screens/auth/login_screen/widgets/custom_text_form_field.dart';
+import 'package:blood_bank/Presentation/screens/auth/verify_email/verify_email.dart';
 import 'package:blood_bank/Presentation/widgets/custom_button.dart';
 import 'package:blood_bank/Presentation/widgets/custom_circular_progress_indicator.dart';
 import 'package:blood_bank/Presentation/widgets/show_custom_snackbar.dart';
 import 'package:blood_bank/bisnesse_logic/bloc_auth/user_auth_bloc.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/constants/g_style.dart';
+import 'package:blood_bank/constants/g_text.dart';
+import 'package:blood_bank/utils/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,24 +25,26 @@ class ResetPasswordScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("استعادة حسابك بسهولة", style: GStyle.titleStyle),
+                    Text(GText.titleResetPasswordScreen,
+                        style: GStyle.titleStyle),
                     SizedBox(height: GSizes.spaceBetweenSections * 2),
-                    Text(
-                        "نسيت كلمة المرور؟ لا مشكلة! أدخل بريدك الإلكتروني أدناه وانقر على الزر لإرسال رابط إعادة التعيين.",
+                    Text(GText.subTitleResetPasswordScreen,
                         style: GStyle.subTitleStyle),
                     SizedBox(height: GSizes.spaceBetweenSections),
                     CustomTextFormField(
-                        text: "ادخل بريدك الالكتروني",
+                        text: GText.enterEmail,
                         icon: Icons.email,
-                        controller: emailController),
+                        controller: emailController,
+                        validator: validateEmail),
                     SizedBox(height: GSizes.spaceBetweenSections * 2),
                     CustomButton(
-                        text: "إرسال رابط إعادة التعيين",
+                        text: GText.sendUrlRestPassword,
                         onPressed: () {
                           context.read<UserAuthBloc>().add(
-                              UserAuthResetPasswordSuccessEvent(
+                              UserAuthResetPasswordEvent(
                                   email: emailController.text.trim()));
                         }),
+                    SizedBox(height: GSizes.spaceBetweenSections * 2),
                     BlocListener<UserAuthBloc, UserAuthState>(
                       listener: (context, state) {
                         if (state is UserAuthResetPasswordSuccessState) {

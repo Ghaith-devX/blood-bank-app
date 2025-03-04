@@ -28,8 +28,8 @@ class UserAuthSignOutEvent extends UserAuthEvent {}
 
 class UserAuthVerifyEmailEvent extends UserAuthEvent {}
 
-class UserAuthResetPasswordSuccessEvent extends UserAuthEvent {
+class UserAuthResetPasswordEvent extends UserAuthEvent {
   final String email;
 
-  UserAuthResetPasswordSuccessEvent({required this.email});
+  UserAuthResetPasswordEvent({required this.email});
 }

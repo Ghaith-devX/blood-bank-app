@@ -66,7 +66,7 @@ class CardDonors extends StatelessWidget {
                       height: 70,
                       width: 70),
                   Positioned(
-                    right: 20,
+                    right: 25,
                     top: 28,
                     child: Text(donorBloodType,
                         style: TextStyle(

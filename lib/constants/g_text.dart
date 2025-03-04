@@ -60,4 +60,10 @@ class GText {
   static const String appLogo =
       "assets/images/logo_app/logo_blood_bank_app.png";
   static const String appName = "بنك الدم اليمني";
+
+  // reset password screen
+  static const String titleResetPasswordScreen = "استعادة حسابك بسهولة";
+  static const String subTitleResetPasswordScreen =
+      "نسيت كلمة المرور؟ لا مشكلة! أدخل بريدك الإلكتروني أدناه وانقر على الزر لإرسال رابط إعادة التعيين.";
+  static const String sendUrlRestPassword = "إرسال رابط إعادة التعيين";
 }
