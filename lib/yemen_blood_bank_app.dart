@@ -1,5 +1,4 @@
 import 'package:blood_bank/Presentation/screens/find_donors_screen/find_donors_screen.dart';
-import 'package:blood_bank/Presentation/screens/on_boarding_screen/on_boarding_screen_one.dart';
 import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/data/services/firebase_service.dart';
 import 'package:flutter/material.dart';
@@ -16,21 +15,22 @@ class YemenBloodBankApp extends StatelessWidget {
       SystemChannels.textInput.invokeMethod('TextInput.hide');
     });
     return MaterialApp(
-      theme: ThemeData(scaffoldBackgroundColor: GColors.white),
-      debugShowCheckedModeBanner: false,
-      locale: Locale('ar'),
-      supportedLocales: [
-        Locale('ar', ''),
-        Locale('en', ''),
-      ],
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      home: userState != null && userState.emailVerified
-          ? FindDonorsScreen()
-          : OnBoardingScreenOne(),
-    );
+        theme: ThemeData(scaffoldBackgroundColor: GColors.white),
+        debugShowCheckedModeBanner: false,
+        locale: Locale('ar'),
+        supportedLocales: [
+          Locale('ar', ''),
+          Locale('en', ''),
+        ],
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        home: FindDonorsScreen()
+        // userState != null && userState.emailVerified
+        //     ? FindDonorsScreen()
+        //     : OnBoardingScreenOne(),
+        );
   }
 }

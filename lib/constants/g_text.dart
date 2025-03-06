@@ -55,6 +55,10 @@ class GText {
   static const String personImage2 = "assets/images/persons/person2.png";
   static const String personImage3 = "assets/images/persons/person3.png";
   static const String titleFindDonorsScreen = "البحث عن متبرعين";
+  static const String requestButton = "إرسال طلب";
+  static const String callNow = "اتصل الآن";
+  static const String timesDonated = " عدد مرات التبرع";
+  static const String bloodType = " نوع الدم";
 
 // app details
   static const String appLogo =

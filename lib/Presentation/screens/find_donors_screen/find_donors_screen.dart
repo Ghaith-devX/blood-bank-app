@@ -1,5 +1,6 @@
 import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/appbar_find_donor_screen.dart';
 import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/card_donors.dart';
+import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/donor_details_bottom_sheet.dart';
 import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/search_bar_find_donors_screen.dart';
 import 'package:blood_bank/Presentation/widgets/custom_circular_progress_indicator.dart';
 import 'package:blood_bank/bisnesse_logic/find_donors/find_donors_bloc.dart';
@@ -18,8 +19,9 @@ class FindDonorsScreen extends StatelessWidget {
       appBar: AppBarFindDonorScreen(),
       body: SingleChildScrollView(
         child: Padding(
-            padding: GSizes.screenPadding,
-            child: Column(children: [
+          padding: GSizes.screenPadding,
+          child: Column(
+            children: [
               SearchBarFindDonorsScreen(),
               SizedBox(height: GSizes.spaceBetweenSections * 2),
               BlocBuilder<FindDonorsBloc, FindDonorsState>(
@@ -32,10 +34,16 @@ class FindDonorsScreen extends StatelessWidget {
                       itemBuilder: (context, i) {
                         return Column(
                           children: [
-                            CardDonors(
+                            InkWell(
+                              onTap: () {
+                                donorDetailsBottomSheet(context, data, i);
+                              },
+                              child: CardDonors(
                                 donorName: data[i].username,
                                 donorLocation: data[i].location,
-                                donorBloodType: data[i].bloodType),
+                                donorBloodType: data[i].bloodType,
+                              ),
+                            ),
                             SizedBox(height: GSizes.spaceBetweenItems),
                           ],
                         );
@@ -48,7 +56,9 @@ class FindDonorsScreen extends StatelessWidget {
                   }
                 },
               ),
-            ])),
+            ],
+          ),
+        ),
       ),
     );
   }
