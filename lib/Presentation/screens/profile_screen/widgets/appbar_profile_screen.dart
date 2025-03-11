@@ -3,16 +3,16 @@ import 'package:blood_bank/constants/g_style.dart';
 import 'package:blood_bank/constants/g_text.dart';
 import 'package:flutter/material.dart';
 
-class AppBarFindDonorScreen extends StatelessWidget
+class AppBarProfileScreen extends StatelessWidget
     implements PreferredSizeWidget {
-  const AppBarFindDonorScreen({super.key});
+  const AppBarProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: GColors.white,
       centerTitle: true,
-      title: Text(GText.titleFindDonorsScreen, style: GStyle.titleStyle),
+      title: Text(GText.titleBarProfileScreen, style: GStyle.titleStyle),
     );
   }
 

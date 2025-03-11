@@ -101,7 +101,7 @@ class FirebaseService {
       final user = await FirebaseFirestore.instance.collection("users").get();
 
       user.docs.forEach((element) {
-        return userList.add(UserModel.fromJson(element.data()));
+        return userList.add(UserModel.fromMap(element.data()));
       });
       return userList;
     } on FirebaseException catch (e) {
@@ -111,6 +111,31 @@ class FirebaseService {
       return userList;
     } catch (e) {
       throw Exception(e.toString());
+    }
+  }
+
+  Future<UserModel> getUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      try {
+        DocumentSnapshot userDoc = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user.uid)
+            .get();
+
+        if (userDoc.exists) {
+          return UserModel.fromMap(userDoc.data() as Map<String, dynamic>);
+        } else {
+          throw Exception("المستخدم غير موجود");
+        }
+      } on FirebaseAuthException {
+        rethrow;
+      } catch (e) {
+        throw Exception('ظهر خطأ غير معروف');
+      }
+    } else {
+      throw Exception("المستخدم لم يسجل الدخول");
     }
   }
 }

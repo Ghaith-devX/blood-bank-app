@@ -57,7 +57,7 @@ class GText {
   static const String titleFindDonorsScreen = "البحث عن متبرعين";
   static const String requestButton = "إرسال طلب";
   static const String callNow = "اتصل الآن";
-  static const String timesDonated = " عدد مرات التبرع";
+  static const String timesDonated = "مرات التبرع";
   static const String bloodType = " نوع الدم";
 
 // app details
@@ -70,4 +70,8 @@ class GText {
   static const String subTitleResetPasswordScreen =
       "نسيت كلمة المرور؟ لا مشكلة! أدخل بريدك الإلكتروني أدناه وانقر على الزر لإرسال رابط إعادة التعيين.";
   static const String sendUrlRestPassword = "إرسال رابط إعادة التعيين";
+
+  // profile screen
+  static const String titleBarProfileScreen = "الملف الشخصي";
+  static const String requested = "مرات الطلب";
 }

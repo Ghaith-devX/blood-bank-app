@@ -15,12 +15,21 @@ class GStyle {
       fontFamily: GText.myFont,
       fontWeight: FontWeight.normal,
       height: 1.8);
+  static const TextStyle unselectedLabelStyle = TextStyle(
+      fontSize: 13,
+      color: GColors.darkGrey,
+      fontFamily: GText.myFont,
+      fontWeight: FontWeight.normal,
+      height: 1.8);
 
   static const TextStyle btnTextStyle = TextStyle(
       fontFamily: GText.myFont,
       fontSize: 16,
       color: GColors.white,
       fontWeight: FontWeight.bold);
+
+  static const TextStyle titleProfileScreen = TextStyle(
+      fontFamily: GText.myFont, fontSize: 25, fontWeight: FontWeight.bold);
 
   static const TextStyle primaryText =
       TextStyle(color: GColors.primaryColor, fontFamily: GText.myFont);

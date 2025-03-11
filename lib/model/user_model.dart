@@ -11,16 +11,16 @@ class UserModel {
     required this.location,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      email: json['email'],
-      username: json['username'],
-      bloodType: json['bloodType'],
-      location: json['location'],
+      email: map['email'],
+      username: map['username'],
+      bloodType: map['bloodType'],
+      location: map['location'],
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return {
       'email': email,
       'username': username,
