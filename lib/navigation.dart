@@ -47,11 +47,12 @@ class NavigationMenu extends StatelessWidget {
                 context.read<NavigationCubit>().navigateTo(index);
               },
               items: [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: "بحث"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.home), label: "الصفحة الرئيسية"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.bloodtype), label: "المتبرعين"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.report), label: "التقارير"),
+                    icon: Icon(Icons.report), label: "حسابي"),
               ],
             ),
           );

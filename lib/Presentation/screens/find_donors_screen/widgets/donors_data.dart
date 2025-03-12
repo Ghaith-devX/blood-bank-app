@@ -2,6 +2,7 @@ import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/card_
 import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/donor_details_bottom_sheet.dart';
 import 'package:blood_bank/Presentation/widgets/custom_circular_progress_indicator.dart';
 import 'package:blood_bank/bisnesse_logic/find_donors/find_donors_bloc.dart';
+import 'package:blood_bank/bisnesse_logic/search_in_donors/search_donors_cubit.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/model/user_model.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,10 @@ class DonorsData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FindDonorsBloc, FindDonorsState>(
+    return BlocBuilder<SearchDonorsCubit, SearchDonorsState>(
       builder: (context, state) {
-        if (state is GetDataLoadedState) {
-          List<UserModel> data = state.myData;
+        if (state is SearchDonorsLoaded) {
+          List<UserModel> data = state.donorsData;
           return ListView.builder(
             shrinkWrap: true,
             itemCount: data.length,
@@ -39,7 +40,7 @@ class DonorsData extends StatelessWidget {
               );
             },
           );
-        } else if (state is GetDataLoadingState) {
+        } else if (state is SearchDonorsLoading) {
           return Center(child: customCircularProgressIndicator());
         } else {
           return Container();

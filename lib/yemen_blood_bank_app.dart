@@ -1,7 +1,6 @@
 import 'package:blood_bank/Presentation/screens/on_boarding_screen/on_boarding_screen_one.dart';
 import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/constants/g_style.dart';
-import 'package:blood_bank/constants/g_text.dart';
 import 'package:blood_bank/data/services/firebase_service.dart';
 import 'package:blood_bank/navigation.dart';
 import 'package:flutter/material.dart';
