@@ -71,10 +71,8 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
           emit(UserAuthVerifyEmailErrorState(error: "المستخدم غير مسجل دخول"));
         }
       } on FirebaseAuthException catch (e) {
-        print("🔥 FirebaseAuthException: ${e.code} - ${e.message}");
         emit(UserAuthVerifyEmailErrorState(error: e.code));
       } catch (e) {
-        print("⚠️ Unexpected error: ${e.toString()}");
         emit(UserAuthVerifyEmailErrorState(error: e.toString()));
       }
     });

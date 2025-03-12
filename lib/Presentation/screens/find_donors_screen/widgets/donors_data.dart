@@ -1,7 +1,6 @@
 import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/card_donors.dart';
 import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/donor_details_bottom_sheet.dart';
 import 'package:blood_bank/Presentation/widgets/custom_circular_progress_indicator.dart';
-import 'package:blood_bank/bisnesse_logic/find_donors/find_donors_bloc.dart';
 import 'package:blood_bank/bisnesse_logic/search_in_donors/search_donors_cubit.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/model/user_model.dart';

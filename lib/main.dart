@@ -21,7 +21,6 @@ void main() async {
             create: (context) =>
                 UserAuthBloc(FirebaseRepository(FirebaseService()))),
         BlocProvider(create: (context) => VerifyEmailCubit()),
-        // BlocProvider(create: (context) => FindDonorsBloc(FirebaseService())),
         BlocProvider(create: (context) => NavigationCubit()),
         BlocProvider(
             create: (context) =>

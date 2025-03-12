@@ -30,22 +30,22 @@ class ProfileScreen extends StatelessWidget {
                 return Column(
                   children: [
                     UserImageProfile(),
-                    SizedBox(height: GSizes.spaceBetweenSections * 2),
+                    SizedBox(height: GSizes.spaceBetweenSections),
                     Text(state.user.username, style: GStyle.titleStyle),
                     SizedBox(height: GSizes.spaceBetweenItems),
                     UserLocationProfile(location: state.user.location),
-                    SizedBox(height: GSizes.spaceBetweenSections * 2),
+                    SizedBox(height: GSizes.spaceBetweenSections),
                     UserDetailsProfile(
                         bloodType: state.user.bloodType,
                         donated: "00",
                         requested: "O+"),
-                    SizedBox(height: GSizes.spaceBetweenSections * 2),
+                    SizedBox(height: GSizes.spaceBetweenSections),
                     SettingsProfileScreen(),
                   ],
                 );
               }
               return Center(
-                  child: Text("لا يوجد انترنت", style: GStyle.subTitleStyle));
+                  child: Text("خطأ غير معروف", style: GStyle.subTitleStyle));
             },
           ),
         ),

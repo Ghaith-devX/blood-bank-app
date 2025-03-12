@@ -1,8 +1,6 @@
 import 'package:blood_bank/Presentation/screens/auth/login_screen/widgets/custom_text_form_field.dart';
-import 'package:blood_bank/Presentation/screens/auth/verify_email/verify_email.dart';
+import 'package:blood_bank/Presentation/screens/auth/reset_password/widgets/reset_password_handler.dart';
 import 'package:blood_bank/Presentation/widgets/custom_button.dart';
-import 'package:blood_bank/Presentation/widgets/custom_circular_progress_indicator.dart';
-import 'package:blood_bank/Presentation/widgets/show_custom_snackbar.dart';
 import 'package:blood_bank/bisnesse_logic/bloc_auth/user_auth_bloc.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/constants/g_style.dart';
@@ -51,21 +49,7 @@ class ResetPasswordScreen extends StatelessWidget {
                           Navigator.of(context).pop();
                         }
                       },
-                      child: BlocBuilder<UserAuthBloc, UserAuthState>(
-                        builder: (context, state) {
-                          if (state is UserAuthResetPasswordLoadingState) {
-                            return Center(
-                                child: customCircularProgressIndicator());
-                          } else if (state
-                              is UserAuthResetPasswordSuccessState) {
-                            showCustomSnackBar(context,
-                                "تم أرسال رابط إعادة التعيين الى بريدك الإلكتروني");
-                          } else if (state is UserAuthResetPasswordErrorState) {
-                            showCustomSnackBar(context, state.error);
-                          }
-                          return SizedBox();
-                        },
-                      ),
+                      child: ResetPasswordHandler(),
                     )
                   ]))),
     );

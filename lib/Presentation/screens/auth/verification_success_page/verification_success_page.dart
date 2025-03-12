@@ -1,7 +1,7 @@
-import 'package:blood_bank/Presentation/screens/find_donors_screen/find_donors_screen.dart';
 import 'package:blood_bank/Presentation/widgets/custom_button.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/constants/g_text.dart';
+import 'package:blood_bank/navigation.dart';
 import 'package:flutter/material.dart';
 
 class VerificationSuccessPage extends StatelessWidget {
@@ -19,7 +19,7 @@ class VerificationSuccessPage extends StatelessWidget {
               text: GText.btnEnd,
               onPressed: () {
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => FindDonorsScreen()),
+                    MaterialPageRoute(builder: (context) => NavigationMenu()),
                     (route) => false);
               })
         ]),
