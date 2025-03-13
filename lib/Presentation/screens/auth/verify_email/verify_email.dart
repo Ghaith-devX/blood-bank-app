@@ -17,12 +17,13 @@ class VerifyEmail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseRepository firebaseRepository =
+        FirebaseRepository(FirebaseService());
     return Scaffold(
       body: Padding(
           padding: GSizes.screenPadding,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(FirebaseRepository(FirebaseService()).userEmail,
-                style: GStyle.titleStyle),
+            Text(firebaseRepository.userEmail, style: GStyle.titleStyle),
             SizedBox(height: GSizes.spaceBetweenItems),
             Text(GText.textVerify,
                 style: GStyle.subTitleStyle, textAlign: TextAlign.center),
@@ -61,8 +62,11 @@ class VerifyEmail extends StatelessWidget {
             BlocListener<VerifyEmailCubit, VerifyEmailState>(
               listener: (context, state) {
                 if (state is UserEmailVerified) {
+                  firebaseRepository.updateEmailVerificationStatus();
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => VerificationSuccessPage()));
+                } else if (state is UserEmailVerificationFailed) {
+                  showCustomSnackBar(context, state.error);
                 }
               },
               child: BlocBuilder<VerifyEmailCubit, VerifyEmailState>(
@@ -77,14 +81,11 @@ class VerifyEmail extends StatelessWidget {
                     return Center(
                         child: Text("لم يتم التحقق من البريد الإلكتروني",
                             style: GStyle.subTitleStyle));
-                  } else if (state is UserEmailVerificationFailed) {
-                    return Center(
-                        child: Text(state.error, style: GStyle.subTitleStyle));
                   }
                   return SizedBox();
                 },
               ),
-            ),
+            )
           ])),
     );
   }

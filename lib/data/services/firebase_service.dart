@@ -9,8 +9,13 @@ class FirebaseService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   User? get currentUser => _auth.currentUser;
 
-  Future<User?> signUpWithEmailPassword(String email, String password,
-      String username, String bloodType, String location) async {
+  Future<User?> signUpWithEmailPassword(
+    String email,
+    String password,
+    String username,
+    String bloodType,
+    String location,
+  ) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -24,6 +29,7 @@ class FirebaseService {
           'username': username,
           'bloodType': bloodType,
           'location': location,
+          'emailVerified': false,
         });
       }
 
@@ -32,6 +38,26 @@ class FirebaseService {
       rethrow;
     } catch (e) {
       throw Exception("حدث خطأ أثناء إنشاء الحساب: ${e.toString()}");
+    }
+  }
+
+  Future<void> updateEmailVerificationStatus() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        await user.reload();
+        if (user.emailVerified) {
+          await FirebaseFirestore.instance
+              .collection("users")
+              .doc(user.uid)
+              .update({"emailVerified": true});
+        }
+      }
+    } on FirebaseException {
+      rethrow;
+    } catch (e) {
+      rethrow;
     }
   }
 
@@ -98,7 +124,10 @@ class FirebaseService {
     List<UserModel> userList = [];
 
     try {
-      final user = await FirebaseFirestore.instance.collection("users").get();
+      final user = await FirebaseFirestore.instance
+          .collection("users")
+          .where("emailVerified", isEqualTo: true)
+          .get();
 
       user.docs.forEach((element) {
         return userList.add(UserModel.fromMap(element.data()));

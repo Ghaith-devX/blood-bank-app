@@ -12,6 +12,10 @@ class FirebaseRepository {
         email, password, username, bloodType, location);
   }
 
+  Future<void> updateEmailVerificationStatus() async {
+    await _firebaseService.updateEmailVerificationStatus();
+  }
+
   Future<User?> signIn(String email, String password) async {
     return await _firebaseService.signInWithEmailPassword(email, password);
   }

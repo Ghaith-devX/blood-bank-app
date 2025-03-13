@@ -1,5 +1,6 @@
 import 'package:blood_bank/data/services/firebase_service.dart';
 import 'package:blood_bank/model/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,6 +25,7 @@ class SearchDonorsCubit extends Cubit<SearchDonorsState> {
         return donor.bloodType.toLowerCase().contains(search.toLowerCase()) ||
             donor.location.toLowerCase().contains(search.toLowerCase());
       }).toList();
+
       emit(SearchDonorsLoaded(donorsData: searchDonors));
     } catch (e) {
       emit(SearchDonorsError(message: e.toString()));
