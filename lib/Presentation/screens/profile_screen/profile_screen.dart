@@ -3,7 +3,6 @@ import 'package:blood_bank/Presentation/screens/profile_screen/widgets/settings_
 import 'package:blood_bank/Presentation/screens/profile_screen/widgets/user_details_profile.dart';
 import 'package:blood_bank/Presentation/screens/profile_screen/widgets/user_image_profile.dart';
 import 'package:blood_bank/Presentation/screens/profile_screen/widgets/user_location_profile.dart';
-import 'package:blood_bank/Presentation/screens/profile_screen/widgets/user_settings_profile.dart';
 import 'package:blood_bank/Presentation/widgets/custom_circular_progress_indicator.dart';
 import 'package:blood_bank/bisnesse_logic/get_user_data/get_user_data_cubit.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
