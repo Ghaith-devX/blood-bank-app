@@ -14,7 +14,7 @@ class CardImageDonor extends StatelessWidget {
       height: 100,
       margin: EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
-          color: GColors.white, borderRadius: BorderRadius.circular(10)),
+          color: GColors.warmWhite, borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Image(image: AssetImage(GText.personImage1)),

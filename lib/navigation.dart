@@ -1,4 +1,5 @@
 import 'package:blood_bank/Presentation/screens/find_donors_screen/find_donors_screen.dart';
+import 'package:blood_bank/Presentation/screens/home_screen/home_screen.dart';
 import 'package:blood_bank/Presentation/screens/profile_screen/profile_screen.dart';
 import 'package:blood_bank/bisnesse_logic/navigation_menu/navigation_cubit.dart';
 import 'package:blood_bank/constants/g_colors.dart';
@@ -15,7 +16,7 @@ class NavigationMenu extends StatelessWidget {
         builder: (context, state) {
           switch (state) {
             case 0:
-              return Container(color: GColors.primaryColor);
+              return HomeScreen();
             case 1:
               return FindDonorsScreen();
             case 2:

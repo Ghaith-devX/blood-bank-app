@@ -54,6 +54,7 @@ class GText {
   static const String personImage1 = "assets/images/persons/person1.png";
   static const String personImage2 = "assets/images/persons/person2.png";
   static const String personImage3 = "assets/images/persons/person3.png";
+  static const String bloodImage = "assets/images/blood.png";
   static const String titleFindDonorsScreen = "البحث عن متبرعين";
   static const String requestButton = "إرسال طلب";
   static const String callNow = "اتصل الآن";

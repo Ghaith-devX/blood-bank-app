@@ -24,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
           controller: controller,
           autofocus: false,
           decoration: InputDecoration(
-              fillColor: GColors.warmWhite,
+              fillColor: GColors.white,
               filled: true,
               hintText: text,
               hintStyle: GStyle.subTitleStyle,

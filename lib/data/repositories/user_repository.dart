@@ -32,5 +32,9 @@ class FirebaseRepository {
     await _firebaseService.resetPassword(email);
   }
 
+  Future<void> deleteUnverifiedUser() async {
+    await _firebaseService.deleteUnverifiedUser();
+  }
+
   String get userEmail => _firebaseService.userEmail;
 }

@@ -167,4 +167,12 @@ class FirebaseService {
       throw Exception("المستخدم لم يسجل الدخول");
     }
   }
+
+  Future<void> deleteUnverifiedUser() async {
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      await user.delete();
+    }
+  }
 }

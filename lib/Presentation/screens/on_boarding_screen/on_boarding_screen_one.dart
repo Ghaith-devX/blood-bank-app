@@ -29,9 +29,7 @@ class _OnBoardingScreenOneState extends State<OnBoardingScreenOne> {
               subTitle: GText.onBoardingSubTitle2),
         ]),
         OnBoardingSkip(),
-        OnBoardingDotNavigation(
-          pageController: pageController,
-        )
+        OnBoardingDotNavigation(pageController: pageController),
       ]),
     );
   }

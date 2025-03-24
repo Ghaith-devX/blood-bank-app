@@ -1,5 +1,4 @@
 import 'package:blood_bank/Presentation/screens/on_boarding_screen/on_boarding_screen_one.dart';
-import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/constants/g_style.dart';
 import 'package:blood_bank/data/services/firebase_service.dart';
 import 'package:blood_bank/navigation.dart';
@@ -18,10 +17,10 @@ class YemenBloodBankApp extends StatelessWidget {
     });
     return MaterialApp(
       theme: ThemeData(
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-              unselectedLabelStyle: GStyle.unselectedLabelStyle,
-              selectedLabelStyle: GStyle.primaryText),
-          scaffoldBackgroundColor: GColors.white),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            unselectedLabelStyle: GStyle.unselectedLabelStyle,
+            selectedLabelStyle: GStyle.primaryText),
+      ),
       debugShowCheckedModeBanner: false,
       locale: Locale('ar'),
       supportedLocales: [

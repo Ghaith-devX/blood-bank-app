@@ -1,4 +1,5 @@
 import 'package:blood_bank/Presentation/screens/find_donors_screen/widgets/card_image_donors.dart';
+import 'package:blood_bank/Presentation/widgets/blood_type_widget.dart';
 import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/constants/g_text.dart';
@@ -19,7 +20,7 @@ class CardDonors extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-          color: GColors.warmWhite, borderRadius: BorderRadius.circular(10)),
+          color: GColors.white, borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -42,7 +43,7 @@ class CardDonors extends StatelessWidget {
                     SizedBox(height: GSizes.spaceBetweenItems),
                     Row(
                       children: [
-                        Icon(Icons.location_on),
+                        Icon(Icons.location_on, color: GColors.primaryColor),
                         Flexible(
                           child: Text(donorLocation,
                               overflow: TextOverflow.ellipsis,
@@ -58,26 +59,7 @@ class CardDonors extends StatelessWidget {
                   ]),
             ),
             SizedBox(width: GSizes.spaceBetweenItems),
-            SizedBox(
-              child: Stack(
-                children: [
-                  Image(
-                      image: AssetImage("assets/images/blood.png"),
-                      height: 70,
-                      width: 70),
-                  Positioned(
-                    right: 25,
-                    top: 28,
-                    child: Text(donorBloodType,
-                        style: TextStyle(
-                            color: GColors.white,
-                            fontSize: 18,
-                            fontFamily: GText.myFont,
-                            fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              ),
-            ),
+            BloodTypeWidget(donorBloodType: donorBloodType),
           ],
         ),
       ),
