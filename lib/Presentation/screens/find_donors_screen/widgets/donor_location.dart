@@ -14,6 +14,7 @@ class DonorLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.location_on, color: GColors.primaryColor),
         SizedBox(width: GSizes.spaceBetweenItems - 5),

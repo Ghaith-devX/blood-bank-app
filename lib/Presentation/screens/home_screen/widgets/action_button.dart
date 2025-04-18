@@ -1,28 +1,34 @@
 import 'package:blood_bank/constants/g_colors.dart';
 import 'package:blood_bank/constants/g_sizes.dart';
 import 'package:blood_bank/constants/g_style.dart';
-import 'package:blood_bank/constants/g_text.dart';
 import 'package:flutter/material.dart';
 
-class CallNowButton extends StatelessWidget {
-  const CallNowButton({
+class ActionButton extends StatelessWidget {
+  const ActionButton({
     super.key,
+    required this.label,
+    required this.color,
+    required this.onPressed,
+    required this.icon,
   });
-
+  final String label;
+  final Color color;
+  final IconData icon;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
         style: ButtonStyle(
             shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10))),
-            backgroundColor: WidgetStatePropertyAll(GColors.tealGray)),
-        onPressed: () {},
+            backgroundColor: WidgetStatePropertyAll(color)),
+        onPressed: onPressed,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.call_end, color: GColors.white),
+            Icon(icon, color: GColors.white),
             SizedBox(width: GSizes.spaceBetweenItems),
-            Text(GText.callNow, style: GStyle.btnTextStyle)
+            Text(label, style: GStyle.btnTextStyle)
           ],
         ));
   }

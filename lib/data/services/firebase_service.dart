@@ -41,6 +41,35 @@ class FirebaseService {
     }
   }
 
+  Future<void> sendRequest(
+      {required String bloodType,
+      required String phoneNumber,
+      required String note,
+      required String dEmail,
+      required String hospital}) async {
+    try {
+      if (currentUser != null) {
+        await _firestore.collection("requests").add({
+          "bloodType": bloodType.trim(),
+          "phoneDonor": phoneNumber.trim(),
+          "note": note.trim(),
+          "hospital": hospital.trim(),
+          "email": dEmail,
+          'createdAt': FieldValue.serverTimestamp(),
+        });
+      } else {
+        throw Exception("المستخدم غير موجود");
+      }
+    } on FirebaseException catch (e) {
+      if (kDebugMode) {
+        print("خطأ ${e.code} : ${e.message}");
+      }
+      throw Exception("حدث خطأ أثناء إرسال الطلب: ${e.toString()}");
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> updateEmailVerificationStatus() async {
     try {
       User? user = FirebaseAuth.instance.currentUser;
@@ -120,6 +149,34 @@ class FirebaseService {
     return "لا يوجد مستخدم";
   }
 
+  Future<List<Map<String, dynamic>>> fetchAllRequests(String email) async {
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection("requests")
+          .where("email", isEqualTo: email)
+          .get();
+
+      return querySnapshot.docs.map((doc) {
+        final data = doc.data();
+        data['id'] = doc.id;
+        return data;
+      }).toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteRequestById(String requestId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('requests')
+          .doc(requestId)
+          .delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<List<UserModel>> get() async {
     List<UserModel> userList = [];
 
@@ -168,11 +225,20 @@ class FirebaseService {
     }
   }
 
-  Future<void> deleteUnverifiedUser() async {
-    final user = FirebaseAuth.instance.currentUser;
+  // Future<void> deleteUnverifiedUser() async {
+  //   final user = FirebaseAuth.instance.currentUser;
 
-    if (user != null && !user.emailVerified) {
-      await user.delete();
-    }
-  }
+  //   if (user != null && !user.emailVerified) {
+  //     await user.delete();
+  //   }
+  // }
+
+  // void phoneAuthentication(String phoneNo) async {
+  //   await _auth.verifyPhoneNumber(
+  //       phoneNumber: phoneNo,
+  //       verificationCompleted: (credentials) {},
+  //       verificationFailed: (e) {},
+  //       codeSent: (verificationId, resendToken) {},
+  //       codeAutoRetrievalTimeout: (verificationId) {});
+  // }
 }

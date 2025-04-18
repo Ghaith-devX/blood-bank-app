@@ -41,6 +41,12 @@ class GText {
   static const String richTextOneSignupScreen = "لديك حساب بالفعل؟";
   static const String richTextTwoSignupScreen = "  تسجيل الدخول";
 
+  // Login With Phone Screen
+  static const String titlePhoneScreen =
+      'أدخل رقم هاتفك المحمول للحصول على رمز التحقق (OTP).';
+  static const String phoneNumber = 'رقم الهاتف';
+  static const String getOTP = 'احصل على رمز التحقق';
+
   // verify screen
   static const String textVerify =
       "بالنقر على هذا الزر، سيتم إرسال رسالة تحقق إلى بريدك الإلكتروني. يرجى فتح بريدك والضغط على رابط التحقق لإكمال عملية تأكيد حسابك.";

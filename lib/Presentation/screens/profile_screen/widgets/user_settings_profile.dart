@@ -19,8 +19,9 @@ class UserSettingsProfile extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         height: 60,
+        decoration: BoxDecoration(
+            color: GColors.white, borderRadius: BorderRadius.circular(12)),
         width: double.infinity,
-        color: GColors.warmWhite,
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(

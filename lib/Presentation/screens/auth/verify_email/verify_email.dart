@@ -41,6 +41,8 @@ class VerifyEmail extends StatelessWidget {
                       "تم إرسال رسالة التحقق إلى بريدك الإلكتروني. يرجى التحقق من بريدك واتباع التعليمات لتأكيد حسابك.");
                 } else if (state is UserAuthVerifyEmailErrorState) {
                   showCustomSnackBar(context, state.error);
+                  print(
+                      "================================== ERROR ( ${state.error} )");
                 }
               },
               child: BlocBuilder<UserAuthBloc, UserAuthState>(

@@ -15,7 +15,8 @@ class UserDataContainer extends StatelessWidget {
     return Container(
       height: 100,
       width: 100,
-      color: GColors.warmWhite,
+      decoration: BoxDecoration(
+          color: GColors.white, borderRadius: BorderRadius.circular(16)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

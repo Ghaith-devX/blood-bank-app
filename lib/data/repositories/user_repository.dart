@@ -32,9 +32,28 @@ class FirebaseRepository {
     await _firebaseService.resetPassword(email);
   }
 
-  Future<void> deleteUnverifiedUser() async {
-    await _firebaseService.deleteUnverifiedUser();
+  Future<List<Map<String, dynamic>>> fetchAllRequests(String email) async {
+    final data = _firebaseService.fetchAllRequests(email);
+    return data;
   }
+
+  Future<void> deleteRequestById(String requestId) async {
+    await _firebaseService.deleteRequestById(requestId);
+  }
+
+  Future<void> sendRequest(String bloodType, String phoneNumber, String note,
+      String hospital, String dEmail) async {
+    await _firebaseService.sendRequest(
+        bloodType: bloodType,
+        phoneNumber: phoneNumber,
+        note: note,
+        hospital: hospital,
+        dEmail: dEmail);
+  }
+
+  // Future<void> deleteUnverifiedUser() async {
+  //   await _firebaseService.deleteUnverifiedUser();
+  // }
 
   String get userEmail => _firebaseService.userEmail;
 }

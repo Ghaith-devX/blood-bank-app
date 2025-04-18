@@ -9,6 +9,7 @@ class AppBarHomeScreen extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: GColors.scaffoldBackgroundColor,
       actions: [
         Container(
           height: 38,

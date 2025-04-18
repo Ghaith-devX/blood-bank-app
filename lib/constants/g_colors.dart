@@ -11,4 +11,6 @@ class GColors {
   static const grey = Colors.grey;
   static const whiteGrey = Color.fromARGB(255, 227, 226, 226);
   static const tealGray = Color(0xFF689592);
+
+  static const scaffoldBackgroundColor = Color.fromARGB(255, 247, 247, 247);
 }

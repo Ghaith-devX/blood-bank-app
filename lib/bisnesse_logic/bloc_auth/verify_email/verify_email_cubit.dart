@@ -26,6 +26,7 @@ class VerifyEmailCubit extends Cubit<VerifyEmailState> {
       }
     } catch (e) {
       emit(UserEmailVerificationFailed(error: "حدث خطأ: ${e.toString()}"));
+      print("================================== ERROR ( $e )");
     }
   }
 }

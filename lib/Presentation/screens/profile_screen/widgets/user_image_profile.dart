@@ -13,7 +13,7 @@ class UserImageProfile extends StatelessWidget {
         height: 100,
         width: 100,
         decoration: BoxDecoration(
-          color: GColors.warmWhite,
+          color: GColors.white,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Image(image: AssetImage(GText.personImage3)));
